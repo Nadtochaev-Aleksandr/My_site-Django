@@ -1,15 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "html/base.html" %}
+
+{% block title %}
+Портфолио 1 HTML
+{% endblock %}
+
+{% block content %}
 <h2>Приветсвую тебя на первой странице моего портфолио</h2>
 <h3>Здесь предлагаю перейти по ссылке на мою первую страничкуб написанную на HTML.
 <br>
 Я написал её прослушав курс result_curses, кстати очень неплохой</h3>
-<br><br>
-<a href="https://nadtochaev-aleksandr.github.io/result_curses/" target="_blank">моя HTML страничка</a>
-</body>
-</html>
+{% endblock content %}
+
