@@ -1,0 +1,21 @@
+{% extends "html/base.html" %}
+
+{% block title %}
+Главна страница блога
+{% endblock %}
+
+{% block content %}
+<h1>Моё образование</h1>
+<br>
+{% for i in university %}
+    <li>
+        <h4>{{i.name}}</h4>
+        <h4>{{i.start}}</h4>
+        <h4>{{i.finish}}</h4>
+        <h4>{{i.speciality}}</h4>
+        <p>{{i.qualification}}</p>
+        <p>{{i.bal}}</p>
+        <p>{{i.notification}}</p>
+    </li>
+{% endfor %}
+{% endblock content %}
