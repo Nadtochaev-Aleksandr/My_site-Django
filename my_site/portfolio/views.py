@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render # Обязательные импорты
 
-def p0(request):
-    return render(request, "portfolio/html/portfolio_firstpage.html")
-def p1(request):
-    return render(request, "portfolio/html/p1.html")
+def p0(request): # функция представления р0. Содержит обязательный аргумент request - информацию о запросе
+    return render(request, "portfolio/html/portfolio_firstpage.html") # функция р0 возвращает функцию render, которой первым аргументом передан request (обязательный аргумент!!!), а вторым аргументом передан путь к файлу html шаблона (portfolio/html/portfolio_firstpage.html) - Обязательный аргумент. Следовательно при отработке функции представления р0 будет отработан html шаблон portfolio_firstpage.html, располагающийся по пути my_site/portfolio/templates/portfolio/html/portfolio_firstpage.html
+def p1(request): # функция представления р1. Содержит обязательный аргумент request - информацию о запросе
+    return render(request, "portfolio/html/p1.html") # функция р1 возвращает функцию render, которой первым аргументом передан request (обязательный аргумент!!!), а вторым аргументом передан путь к файлу html шаблона (portfolio/html/portfolio/html/p1.html) - Обязательный аргумент. Следовательно при отработке функции представления р1 будет отработан html шаблон portfolio/html/p1.html, располагающийся по пути my_site/portfolio/templates/portfolio/html/portfolio/html/p1.html

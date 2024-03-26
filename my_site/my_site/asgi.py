@@ -6,7 +6,7 @@ It exposes the ASGI callable as a module-level variable named ``application``.
 For more information on this file, see
 https://docs.djangoproject.com/en/5.0/howto/deployment/asgi/
 """
-
+# Это стандарт для взаимодействия друг с другом асинхронных веб-приложений и серверов Python. Нужен для развётрывания веб сайта на реальном сервере
 import os
 
 from django.core.asgi import get_asgi_application

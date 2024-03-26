@@ -1,26 +1,71 @@
 from django.db import models
 
 # Create your models here.
-class Education(models.Model):
-    # name=models.CharField(verbose_name='Наименование учебного заведения', max_length=250)
-    # start=models.DateField(verbose_name='Дата начала оббучения')
-    # finish = models.DateField(verbose_name='Дата завершения оббучения')
-    # speciality = models.CharField(verbose_name='Специальность', max_length=250)
-    # qualification = models.CharField(verbose_name='Квалификация', max_length=250)
-    # bal = models.CharField(verbose_name='Средний балл', max_length=5)
-    # notification = models.TextField(verbose_name='Примечание', null=True, blank=True)
-    name=models.CharField(max_length=250)
-    start=models.DateField()
-    finish = models.DateField()
-    speciality = models.CharField(max_length=250)
-    qualification = models.CharField(max_length=250)
-    bal = models.CharField(max_length=5)
-    notification = models.TextField(null=True, blank=True)
+class Education(models.Model): # создание модели Education
+    name=models.CharField(max_length=250, verbose_name='Наименование учебного заведения') # поле с наименованием учебного заведения, может содержать не более 250 символов (атирибут max_length) и определение имени отображения столбца в админ панели (атрибут Verbose_name)
+    start=models.DateField(verbose_name='Дата поступления') # дата поступления имееи определение имени отображения столбца в админ панели (атрибут Verbose_name)
+    finish = models.DateField(verbose_name='Дата окончания') # Дата окончания имеет определение имени отображения столбца в админ панели (атрибут Verbose_name)
+    speciality = models.CharField(max_length=250, verbose_name='Специальность') # Специальность (может содержать не более 250 символов и имеет определение имени отображения столбца в админ панели (атрибут Verbose_name))
+    qualification = models.CharField(max_length=250, verbose_name='Квалификация') # Квалификация (может содержать не более 250 символов и имеет определение имени отображения столбца в админ панели (атрибут Verbose_name))
+    bal = models.CharField(max_length=5, verbose_name='Средний балл') # Средний балл (Может содержать не более 5 символов и имеет определение имени отображения столбца в админ панели (атрибут Verbose_name))
+    notification = models.TextField(null=True, blank=True, verbose_name='Примечание') # примечание может быть пустым и имеет определение имени отображения столбца в админ панели (атрибут Verbose_name)) атрибут null - разрешает заполнить ячейку базы данных такими данными как NULL, атрибут blank - указывает валидатору на то что не нужно проводить проверку на заполненность поля. Т.е. для пустого поля необходимы оба атрибута - один для базы данных, второй для валидатора форм
 
+    class Meta: # Встроенный класс, необходимый для тонкой настройки модели Education
+        verbose_name='Образование' # Данная переменная определяет как будет отображаться название модели в админ панели
+        verbose_name_plural='Образование' #Данная переменная определяет отображение названия модели во множественном числе
+        ordering=['id'] # Данная переменная определяет порядок сортировки - в данном случае по полю id
 
-    def str(self):
-        return self.name
-#
-# class Meta:
-#     verbose_name='Образование'
-#     vorbose_name_plural='Образования'
+    def __str__(self): # функция, которая будет отображать во всех таблицах, в том числе и в админ панели поля name вместо id для идентифицирования записи
+        return self.name # в этой строке указано что необходимо возвращать, в данном случае возращается поле name
+
+class Experience(models.Model): # модель опыт работы
+    organization=models.CharField(max_length=200, verbose_name='Организация') # Поле "Оргазинация", задано в формате простого однострочного текстового поля, имеет ограничение по количеству символов (атрибут max_length =200) и определение имени отображения столбца в админ панели (атрибут verbose_name= Организация)
+    start_date=models.DateField(verbose_name="Дата начала работы") # Поле дата начала работы, задано как поле в формате дата, имеет атрибут verbose_name определяющий имя отображения столбца в админ панели
+    end_date=models.DateField(null=True, blank=True, verbose_name='Дата окончания работы') # Поле Дата увольнения, задано как поле в формате дата, может быть пустым (атрибуты null=True, blank=True), имеет атрибут verbose_name определяющий имя отображения столбца в админ панели
+    job=models.CharField(max_length=200, verbose_name='Должность') # Поле Должность, задано в формате простого однострочного текстового поля, имеет ограничение по количеству символов (атрибут max_length =200) и определение имени отображения столбца в админ панели (атрибут verbose_name= Должность)
+    responsibilities=models.TextField(verbose_name="Обязанности") #Поле обязанности, задано в формате многострочного текстового поля, имеет атрибут verbose_name="Обязанности", задающий его наименование в админ панели
+
+    def __str__(self): # метод, который вместо id будет отображать поле Job, как более понятную и приёмлемую информацию
+        return self.job #Возврат поля job модели Experience
+
+    class Meta: # Класс для настройки модели
+        verbose_name="Опыт работы" # метод, определяющий под каким именем будет отображаться наименование модели в админ панели
+        verbose_name_plural="Опыт работы" # метод, определяющий под каким именем будет отображаться наименование модели во множественном числе
+
+class ProfScills(models.Model): # модель профессиональные навыки
+    titel=models.CharField(max_length=200, verbose_name="профессиональные навыки") # Поле профессиональные навыки, задано в формате оджнострочного текстового поля, имеет ограничение не более 200 символов, имеет атрибут verbose_name="профессиональные навыки", задающий его наименование в админ панели
+
+    def __str__(self): # метод, который вместо id будет отображать поле title, как более понятную и приёмлемую информацию
+        return self.titel # тут в return и указывается какое поле необходимо возвращать вместо id
+
+    class Meta: # Класс для более тонкой настройки модели
+        verbose_name="Профессиональные навыки" # метод, определяющий под каким именем будет отображаться наименование модели в админ панели
+        verbose_name_plural="Профессиональные навыки" # метод, определяющий под каким именем будет отображаться наименование модели во множественном числе
+
+class PersonalScills(models.Model): # модель личностные навыки
+    titel=models.CharField(max_length=200, verbose_name="личностные навыки")  # Поле профессиональные навыки, задано в формате оджнострочного текстового поля, имеет ограничение не более 200 символов, имеет атрибут verbose_name="личностные навыки", задающий его наименование в админ панели
+
+    def __str__(self): # метод, который вместо id будет отображать поле title, как более понятную и приёмлемую информацию
+        return self.titel # тут в return и указывается какое поле необходимо возвращать вместо id
+
+    class Meta: # Класс для более тонкой настройки модели
+        verbose_name="Личностные навыки" # метод, определяющий под каким именем будет отображаться наименование модели в админ панели
+        verbose_name_plural="Личностные навыки" # метод, определяющий под каким именем будет отображаться наименование модели во множественном числе
+
+class PersonalInfo(models.Model): # модель обо мне
+    titel=models.TextField(verbose_name="Информация обо мне") # Поле "Информация обо мне", заданное как поле для многострочного текста, имеет атрибут задающий имя отображения столбца данного поля в админ панели (verbose_name="Информация обо мне").
+
+    def __str__(self): # метод, который вместо id будет отображать поле title, как более понятную и приёмлемую информацию
+        return self.titel # тут в return и указывается какое поле необходимо возвращать вместо id
+
+    class Meta: # Класс для более тонкой настройки модели
+        verbose_name="Информация обо мне" # метод, определяющий под каким именем будет отображаться наименование модели в админ панели
+        verbose_name_plural="Информация обо мне" # метод, определяющий под каким именем будет отображаться наименование модели во множественном числе
+
+class Blog(models.Model): # Создание модели блога для связи всех остальных моделей блога между собой через эту модель
+    #Всё хуйня! Переделать! (Эту модеь)
+    education=models.ForeignKey(Education, on_delete=models.PROTECT)
+    experience=models.ForeignKey(Experience, on_delete=models.PROTECT)
+    profscills=models.ForeignKey(ProfScills, on_delete=models.PROTECT)
+    personalscills=models.ForeignKey(PersonalScills, on_delete=models.PROTECT)
+    aboutme=models.OneToOneField(PersonalInfo, on_delete=models.PROTECT)

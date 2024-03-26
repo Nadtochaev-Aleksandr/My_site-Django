@@ -1,8 +1,8 @@
-from django.urls import path
-from . import views
+from django.urls import path # Обязательный импорт функции path
+from . import views # из папки приложения blog импортируется попка views
 
-urlpatterns = [
-    path('', views.blog1, name='blog0'),
-    path('blog2/', views.education, name='university'),
+urlpatterns = [ # Переменная urlpatterns содержит в себе список функций path. Функция path - "Путь/след" отвечает за то какая функция представления будет отрабаотывать по какому url путм, принимает в себя имя url адреса, путь к функции представления и иные необязательные аргументы, например name
+    path('', views.blog1, name='blog0'), # первая функция path. Содержит нулевое имя url адреса (" " - пустая строка). Это значит что попадае в приложение blog пользователь автоматически попадет на страничку с этим путём. Главная страница приложения blog. (адрес: htts:blog/) Функция представления - views.blog1 т.е. blog1 из папки views.py. Так же задана атрибут name="blog0", определяющий имя url адреса по которому на него будут ссылаться в шаблонах
+    path('blog2/', views.education, name='university'), # Вторая функция path. Содержит имя url адреса - blog2. Т.е. полный адрес страницы будет https:blog/blog2. Вторым аргументом передан путь к функции представления education файла views.py (views.education), третьим аргументом задано имя маршрута name='university'
 
 ]
